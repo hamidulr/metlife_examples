@@ -1,0 +1,27 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: python
+  name: vote
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: python
+      role: vote
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: python
+        role: vote
+        version: v2
+    spec:
+      containers:
+      - image: schoolofdevops/vote:v2
+        imagePullPolicy: IfNotPresent
+        name: vote
+        ports:
+        - containerPort: 80
